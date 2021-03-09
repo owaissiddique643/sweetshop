@@ -1,71 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import './index.css'
-
-
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-
-import Login from "./components/login/login"
-import Signup from "./components/signup/signup"
-// import Dashboard from "./components/dashboard/dashboard"
-// import { useGlobalState } from "./state/GlobalState";
+import React from "react"
+// import './App.css';
+import Navigation from "./components/navigation/navigation"
+import {GlobalStateProvider} from "./context/globalcontext"
 
 function App() {
-  // const globalState = useGlobalState();
-  // const setGlobalState = useSetGlobalState();
-  return (
-    <div className="App">
 
-      <Router>
+  return(<>
+  <GlobalStateProvider>
+  <Navigation/>
 
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">login</Link>
-            </li>
-            <li>
-              <Link to="/signup">Signup</Link>
-            </li>
-            {/* <li>
-              <Link to="/dashboard">dashboard</Link>
-            </li> */}
-          </ul>
-        </nav>
+  </GlobalStateProvider>
 
-
-        <Switch>
-
-          <Route exact={true}  path="/">
-            <Login />
-          </Route>
-          {/* <Route path="/dashboard">
-            <Dashboard />
-          </Route> */}
-
-          <Route path="/signup">
-            <Signup />
-          </Route>
-
-
-
-
-
-
-
-        </Switch>
-
-      </Router>
-
-
-
-    </div>
-  );
+ </> );
 }
 
 export default App;

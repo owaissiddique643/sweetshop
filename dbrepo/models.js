@@ -31,15 +31,13 @@ var userSchema = new mongoose.Schema({
     name: String,
     email: String,
     password: String,
+    role: {type: String,'default': "user"},
     // profilePic: String,
     // phone: String,
     // gender: String,
-    createdOn: {
-        type: Date,
-        'default': Date.now
-    }
+    createdOn:{type: Date,'default': Date.now}
 });
-var userModel = mongoose.model("users", userSchema);
+var userModel = mongoose.model("SweetShopUsers", userSchema);
 
 module.exports = {
     userModel: userModel

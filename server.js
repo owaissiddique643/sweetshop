@@ -21,7 +21,7 @@ var server = http.createServer(app);
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors({
-    origin: "http://localhost:5000",
+    origin: ["http://localhost:3000", "http://localhost:5000"],
     credentials: true
 }));
 
@@ -65,6 +65,7 @@ app.use(function (req, res, next) {
                     id: decodedData.id,
                     name: decodedData.name,
                     email: decodedData.email,
+                    role: decodedData.role,
                     // phone: decodedData.phone,
                     // gender: decodedData.gender,
                 }, SERVER_SECRET)
@@ -86,7 +87,7 @@ app.use(function (req, res, next) {
 app.get("/profile", (req, res, next) => {
     console.log(req.body);
 
-    userModel.findById(req.body.jToken.id, 'name email createdOn', function (err, doc) {
+    userModel.findById(req.body.jToken.id, 'name email createdOn role', function (err, doc) {
         if (!err) {
             res.send({
                 profile: doc

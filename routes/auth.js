@@ -77,43 +77,43 @@ api.post("/signup", (req, res, next) => {
 
 
 
-api.post("/validemail", (req, res, next) => {
+// api.post("/validemail", (req, res, next) => {
 
-    if (
-        !req.body.email
-    ) {
+//     if (
+//         !req.body.email
+//     ) {
 
-        res.status(403).send(`
-            please send name, email, password and  in json body.
-            e.g:
-            {
-                "name": "farooqi",
-                "email": "farooqi@gmail.com",
-                "password": "123"
+//         res.status(403).send(`
+//             please send name, email, password and  in json body.
+//             e.g:
+//             {
+//                 "name": "farooqi",
+//                 "email": "farooqi@gmail.com",
+//                 "password": "123"
                 
-            }`)
-        return;
-    }
-    userModel.findOne({ email: req.body.email }, function (err, doc) {
-        if (!err) {
-            if (doc) {
-                res.send({
-                    status: 200,
-                    isFound: true
-                })
-            } else {
-                res.send({
-                    status: 200,
-                    isFound: false
-                })
-            }
-        } else {
-            res.send({
-                status: 500
-            })
-        }
-    });
-});
+//             }`)
+//         return;
+//     }
+//     userModel.findOne({ email: req.body.email }, function (err, doc) {
+//         if (!err) {
+//             if (doc) {
+//                 res.send({
+//                     status: 200,
+//                     isFound: true
+//                 })
+//             } else {
+//                 res.send({
+//                     status: 200,
+//                     isFound: false
+//                 })
+//             }
+//         } else {
+//             res.send({
+//                 status: 500
+//             })
+//         }
+//     });
+// });
 
 
 
@@ -150,6 +150,7 @@ api.post("/login", (req, res, next) => {
                             id: user._id,
                             name: user.name,
                             email: user.email,
+                            role: user.role,
                         }, SERVER_SECRET)
 
                     res.cookie('jToken', token, {
@@ -174,7 +175,7 @@ api.post("/login", (req, res, next) => {
                     })
                 }
             }).catch(e => {
-                console.log("errorhello: ", e)
+                console.log("error: ", e)
             })
 
         } else {
